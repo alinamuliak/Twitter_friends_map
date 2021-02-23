@@ -1,9 +1,13 @@
+"""
+This module works with twitter API.
+It contaons functions to gey users' nicknames and location, build a map
+and create a server with GET and POST requests.
+"""
+
 from flask import Flask, render_template, request
 import requests
 import folium
-from pprint import pprint
 from folium.plugins import MarkerCluster
-from haversine import haversine
 from geopy.geocoders import Nominatim
 geolocator = Nominatim(user_agent="map_builder")
 app = Flask(__name__)
@@ -27,7 +31,6 @@ def find_friends_location(screen_name: str, bearer_token: str) -> list:
     response = requests.get(
         search_url, headers=search_headers, params=search_params)
     json_response = response.json()
-    # pprint(json_response)
     if not json_response or 'errors' in json_response:
         return []
     loc_and_names = []
@@ -45,7 +48,6 @@ def location_to_coordinates(friends_locations: list) -> list:
     """
     global geolocator
     coord_list = []
-    # print(friends_locations)
     for friend in friends_locations:
         try:
             location = geolocator.geocode(friend[-1])
