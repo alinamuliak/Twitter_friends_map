@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<h1 class="greeting">Twitter friends on map</h1>
+<form action="/register" method="post">
+    <input name="screen_name" placeholder="Enter the nickname" type="text">
+    <input name="bearer_token" placeholder="Enter your Bearer token" type="text">
+    <input type="submit" value="Create">
+</form>
+{% endblock %}
